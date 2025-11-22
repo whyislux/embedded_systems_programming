@@ -1,2 +1,2 @@
-# embedded_systems_programming
-Repo para Programacion de Sistemas Embebidos
+# Embedeed Systems Programming
+Repositorio en el cual estaran anexados documentos y codigos hechos en clase
