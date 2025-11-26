@@ -1,0 +1,1234 @@
+
+
+Microchip MPLAB XC8 Assembler V3.10 build 20250813170317 
+                                                                                               Fri Nov 14 11:25:49 2025
+
+Microchip MPLAB XC8 C Compiler v3.10 (Free license) build 20250813170317 Og1 
+     1                           	processor	16F877A
+     2                           	pagewidth 120
+     3                           	opt	flic
+     4                           	psect	cinit,global,class=CODE,space=0,merge=1,delta=2
+     5                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1,noexec
+     6                           	psect	cstackBANK0,global,class=BANK0,space=1,delta=1,noexec
+     7                           	psect	maintext,global,class=CODE,space=0,split=1,delta=2
+     8                           	psect	text1,local,class=CODE,space=0,merge=1,delta=2
+     9                           	psect	text2,local,class=CODE,space=0,merge=1,delta=2,group=1
+    10                           	psect	text3,local,class=CODE,space=0,merge=1,delta=2,group=1
+    11                           	psect	text4,local,class=CODE,space=0,merge=1,delta=2
+    12                           	dabs	1,0x7E,2
+    13     0000                     
+    14                           ; Generated 12/10/2023 GMT
+    15                           ; 
+    16                           ; Copyright © 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    17                           ; All rights reserved.
+    18                           ; 
+    19                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    20                           ; 
+    21                           ; Redistribution and use in source and binary forms, with or without modification, are
+    22                           ; permitted provided that the following conditions are met:
+    23                           ; 
+    24                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    25                           ;        conditions and the following disclaimer.
+    26                           ; 
+    27                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    28                           ;        of conditions and the following disclaimer in the documentation and/or other
+    29                           ;        materials provided with the distribution. Publication is not required when
+    30                           ;        this file is used in an embedded application.
+    31                           ; 
+    32                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    33                           ;        software without specific prior written permission.
+    34                           ; 
+    35                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    36                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    37                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    38                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    39                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    40                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    41                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    42                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    43                           ; 
+    44                           ; 
+    45                           ; Code-generator required, PIC16F877A Definitions
+    46                           ; 
+    47                           ; SFR Addresses
+    48     0004                     fsr             equ	4
+    49     0004                     fsr0            equ	4
+    50     0000                     indf            equ	0
+    51     0000                     indf0           equ	0
+    52     0002                     pc              equ	2
+    53     0002                     pcl             equ	2
+    54     000A                     pclath          equ	10
+    55     0003                     status          equ	3
+    56     0000                     INDF            equ	0	;# 
+    57     0001                     TMR0            equ	1	;# 
+    58     0002                     PCL             equ	2	;# 
+    59     0003                     STATUS          equ	3	;# 
+    60     0004                     FSR             equ	4	;# 
+    61     0005                     PORTA           equ	5	;# 
+    62     0006                     PORTB           equ	6	;# 
+    63     0007                     PORTC           equ	7	;# 
+    64     0008                     PORTD           equ	8	;# 
+    65     0009                     PORTE           equ	9	;# 
+    66     000A                     PCLATH          equ	10	;# 
+    67     000B                     INTCON          equ	11	;# 
+    68     000C                     PIR1            equ	12	;# 
+    69     000D                     PIR2            equ	13	;# 
+    70     000E                     TMR1            equ	14	;# 
+    71     000E                     TMR1L           equ	14	;# 
+    72     000F                     TMR1H           equ	15	;# 
+    73     0010                     T1CON           equ	16	;# 
+    74     0011                     TMR2            equ	17	;# 
+    75     0012                     T2CON           equ	18	;# 
+    76     0013                     SSPBUF          equ	19	;# 
+    77     0014                     SSPCON          equ	20	;# 
+    78     0015                     CCPR1           equ	21	;# 
+    79     0015                     CCPR1L          equ	21	;# 
+    80     0016                     CCPR1H          equ	22	;# 
+    81     0017                     CCP1CON         equ	23	;# 
+    82     0018                     RCSTA           equ	24	;# 
+    83     0019                     TXREG           equ	25	;# 
+    84     001A                     RCREG           equ	26	;# 
+    85     001B                     CCPR2           equ	27	;# 
+    86     001B                     CCPR2L          equ	27	;# 
+    87     001C                     CCPR2H          equ	28	;# 
+    88     001D                     CCP2CON         equ	29	;# 
+    89     001E                     ADRESH          equ	30	;# 
+    90     001F                     ADCON0          equ	31	;# 
+    91     0081                     OPTION_REG      equ	129	;# 
+    92     0085                     TRISA           equ	133	;# 
+    93     0086                     TRISB           equ	134	;# 
+    94     0087                     TRISC           equ	135	;# 
+    95     0088                     TRISD           equ	136	;# 
+    96     0089                     TRISE           equ	137	;# 
+    97     008C                     PIE1            equ	140	;# 
+    98     008D                     PIE2            equ	141	;# 
+    99     008E                     PCON            equ	142	;# 
+   100     0091                     SSPCON2         equ	145	;# 
+   101     0092                     PR2             equ	146	;# 
+   102     0093                     SSPADD          equ	147	;# 
+   103     0094                     SSPSTAT         equ	148	;# 
+   104     0098                     TXSTA           equ	152	;# 
+   105     0099                     SPBRG           equ	153	;# 
+   106     009C                     CMCON           equ	156	;# 
+   107     009D                     CVRCON          equ	157	;# 
+   108     009E                     ADRESL          equ	158	;# 
+   109     009F                     ADCON1          equ	159	;# 
+   110     010C                     EEDATA          equ	268	;# 
+   111     010D                     EEADR           equ	269	;# 
+   112     010E                     EEDATH          equ	270	;# 
+   113     010F                     EEADRH          equ	271	;# 
+   114     018C                     EECON1          equ	396	;# 
+   115     018D                     EECON2          equ	397	;# 
+   116     0000                     INDF            equ	0	;# 
+   117     0001                     TMR0            equ	1	;# 
+   118     0002                     PCL             equ	2	;# 
+   119     0003                     STATUS          equ	3	;# 
+   120     0004                     FSR             equ	4	;# 
+   121     0005                     PORTA           equ	5	;# 
+   122     0006                     PORTB           equ	6	;# 
+   123     0007                     PORTC           equ	7	;# 
+   124     0008                     PORTD           equ	8	;# 
+   125     0009                     PORTE           equ	9	;# 
+   126     000A                     PCLATH          equ	10	;# 
+   127     000B                     INTCON          equ	11	;# 
+   128     000C                     PIR1            equ	12	;# 
+   129     000D                     PIR2            equ	13	;# 
+   130     000E                     TMR1            equ	14	;# 
+   131     000E                     TMR1L           equ	14	;# 
+   132     000F                     TMR1H           equ	15	;# 
+   133     0010                     T1CON           equ	16	;# 
+   134     0011                     TMR2            equ	17	;# 
+   135     0012                     T2CON           equ	18	;# 
+   136     0013                     SSPBUF          equ	19	;# 
+   137     0014                     SSPCON          equ	20	;# 
+   138     0015                     CCPR1           equ	21	;# 
+   139     0015                     CCPR1L          equ	21	;# 
+   140     0016                     CCPR1H          equ	22	;# 
+   141     0017                     CCP1CON         equ	23	;# 
+   142     0018                     RCSTA           equ	24	;# 
+   143     0019                     TXREG           equ	25	;# 
+   144     001A                     RCREG           equ	26	;# 
+   145     001B                     CCPR2           equ	27	;# 
+   146     001B                     CCPR2L          equ	27	;# 
+   147     001C                     CCPR2H          equ	28	;# 
+   148     001D                     CCP2CON         equ	29	;# 
+   149     001E                     ADRESH          equ	30	;# 
+   150     001F                     ADCON0          equ	31	;# 
+   151     0081                     OPTION_REG      equ	129	;# 
+   152     0085                     TRISA           equ	133	;# 
+   153     0086                     TRISB           equ	134	;# 
+   154     0087                     TRISC           equ	135	;# 
+   155     0088                     TRISD           equ	136	;# 
+   156     0089                     TRISE           equ	137	;# 
+   157     008C                     PIE1            equ	140	;# 
+   158     008D                     PIE2            equ	141	;# 
+   159     008E                     PCON            equ	142	;# 
+   160     0091                     SSPCON2         equ	145	;# 
+   161     0092                     PR2             equ	146	;# 
+   162     0093                     SSPADD          equ	147	;# 
+   163     0094                     SSPSTAT         equ	148	;# 
+   164     0098                     TXSTA           equ	152	;# 
+   165     0099                     SPBRG           equ	153	;# 
+   166     009C                     CMCON           equ	156	;# 
+   167     009D                     CVRCON          equ	157	;# 
+   168     009E                     ADRESL          equ	158	;# 
+   169     009F                     ADCON1          equ	159	;# 
+   170     010C                     EEDATA          equ	268	;# 
+   171     010D                     EEADR           equ	269	;# 
+   172     010E                     EEDATH          equ	270	;# 
+   173     010F                     EEADRH          equ	271	;# 
+   174     018C                     EECON1          equ	396	;# 
+   175     018D                     EECON2          equ	397	;# 
+   176     0005                     _PORTA          set	5
+   177     0006                     _PORTBbits      set	6
+   178     0017                     _CCP1CONbits    set	23
+   179     0015                     _CCPR1L         set	21
+   180     0012                     _T2CON          set	18
+   181     0017                     _CCP1CON        set	23
+   182     0085                     _TRISA          set	133
+   183     0086                     _TRISB          set	134
+   184     0087                     _TRISCbits      set	135
+   185     0092                     _PR2            set	146
+   186                           
+   187                           	psect	cinit
+   188     07FC                     start_initialization:	
+   189                           ; #config settings
+   190                           
+   191     07FC                     __initialization:
+   192     07FC                     end_of_initialization:	
+   193                           ;End of C runtime variable initialization code
+   194                           
+   195     07FC                     __end_of__initialization:
+   196     07FC  0183               	clrf	3
+   197     07FD  120A  118A  2F00   	ljmp	_main	;jump to C main() function
+   198                           
+   199                           	psect	cstackCOMMON
+   200     0070                     __pcstackCOMMON:
+   201     0070                     ?_pwm_init:
+   202     0070                     ?_set_percent:	
+   203                           ; 1 bytes @ 0x0
+   204                           
+   205     0070                     ?_main:	
+   206                           ; 1 bytes @ 0x0
+   207                           
+   208     0070                     ?___lmul:	
+   209                           ; 1 bytes @ 0x0
+   210                           
+   211     0070                     ___lmul@multiplier:	
+   212                           ; 4 bytes @ 0x0
+   213                           
+   214     0070                     ??_pwm_init:	
+   215                           ; 4 bytes @ 0x0
+   216                           
+   217                           
+   218                           ; 1 bytes @ 0x0
+   219     0070                     	ds	4
+   220     0074                     ___lmul@multiplicand:
+   221                           
+   222                           ; 4 bytes @ 0x4
+   223     0074                     	ds	4
+   224     0078                     ??___lmul:
+   225                           
+   226                           ; 1 bytes @ 0x8
+   227     0078                     	ds	1
+   228     0079                     ___lmul@product:
+   229                           
+   230                           ; 4 bytes @ 0x9
+   231     0079                     	ds	4
+   232     007D                     ??___lldiv:
+   233                           
+   234                           ; 1 bytes @ 0xD
+   235     007D                     	ds	1
+   236                           
+   237                           	psect	cstackBANK0
+   238     0020                     __pcstackBANK0:
+   239     0020                     ?___lldiv:
+   240     0020                     ___lldiv@divisor:	
+   241                           ; 4 bytes @ 0x0
+   242                           
+   243                           
+   244                           ; 4 bytes @ 0x0
+   245     0020                     	ds	4
+   246     0024                     ___lldiv@dividend:
+   247                           
+   248                           ; 4 bytes @ 0x4
+   249     0024                     	ds	4
+   250     0028                     ___lldiv@quotient:
+   251                           
+   252                           ; 4 bytes @ 0x8
+   253     0028                     	ds	4
+   254     002C                     ___lldiv@counter:
+   255                           
+   256                           ; 1 bytes @ 0xC
+   257     002C                     	ds	1
+   258     002D                     ??_set_percent:
+   259                           
+   260                           ; 1 bytes @ 0xD
+   261     002D                     	ds	5
+   262     0032                     set_percent@max_counts:
+   263                           
+   264                           ; 2 bytes @ 0x12
+   265     0032                     	ds	2
+   266     0034                     set_percent@percent:
+   267                           
+   268                           ; 1 bytes @ 0x14
+   269     0034                     	ds	1
+   270     0035                     set_percent@dc:
+   271                           
+   272                           ; 4 bytes @ 0x15
+   273     0035                     	ds	4
+   274     0039                     ??_main:
+   275                           
+   276                           ; 1 bytes @ 0x19
+   277     0039                     	ds	2
+   278     003B                     main@velocity:
+   279                           
+   280                           ; 1 bytes @ 0x1B
+   281     003B                     	ds	1
+   282                           
+   283                           	psect	maintext
+   284     0700                     __pmaintext:	
+   285 ;;
+   286 ;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
+   287 ;;
+   288 ;; *************** function _main *****************
+   289 ;; Defined at:
+   290 ;;		line 33 in file "reusable_pwm.c"
+   291 ;; Parameters:    Size  Location     Type
+   292 ;;		None
+   293 ;; Auto vars:     Size  Location     Type
+   294 ;;  velocity        1   27[BANK0 ] unsigned char 
+   295 ;; Return value:  Size  Location     Type
+   296 ;;                  1    wreg      void 
+   297 ;; Registers used:
+   298 ;;		wreg, status,2, status,0, pclath, cstack
+   299 ;; Tracked objects:
+   300 ;;		On entry : B00/0
+   301 ;;		On exit  : 0/0
+   302 ;;		Unchanged: 0/0
+   303 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   304 ;;      Params:         0       0       0       0       0
+   305 ;;      Locals:         0       1       0       0       0
+   306 ;;      Temps:          0       2       0       0       0
+   307 ;;      Totals:         0       3       0       0       0
+   308 ;;Total ram usage:        3 bytes
+   309 ;; Hardware stack levels required when called: 2
+   310 ;; This function calls:
+   311 ;;		_pwm_init
+   312 ;;		_set_percent
+   313 ;; This function is called by:
+   314 ;;		Startup code after reset
+   315 ;; This function uses a non-reentrant model
+   316 ;;
+   317                           
+   318     0700                     _main:	
+   319                           ;psect for function _main
+   320                           
+   321     0700                     l738:	
+   322                           ;incstack = 0
+   323                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   324                           
+   325                           
+   326                           ;reusable_pwm.c: 34:     TRISB = 0xFF;
+   327     0700  30FF               	movlw	255
+   328     0701  1683               	bsf	3,5	;RP0=1, select bank1
+   329     0702  1303               	bcf	3,6	;RP1=0, select bank1
+   330     0703  0086               	movwf	6	;volatile
+   331     0704                     l740:
+   332                           
+   333                           ;reusable_pwm.c: 35:     TRISA = 0x00;
+   334     0704  0185               	clrf	5	;volatile
+   335     0705                     l742:
+   336                           
+   337                           ;reusable_pwm.c: 37:     pwm_init();
+   338     0705  120A  118A  2643  120A  118A  	fcall	_pwm_init
+   339     070A                     l744:
+   340                           
+   341                           ;reusable_pwm.c: 38:     unsigned char velocity = 0;
+   342     070A  1283               	bcf	3,5	;RP0=0, select bank0
+   343     070B  1303               	bcf	3,6	;RP1=0, select bank0
+   344     070C  01BB               	clrf	main@velocity
+   345     070D                     l746:
+   346                           
+   347                           ;reusable_pwm.c: 41:         if(PORTBbits.RB1){
+   348     070D  1283               	bcf	3,5	;RP0=0, select bank0
+   349     070E  1303               	bcf	3,6	;RP1=0, select bank0
+   350     070F  1C86               	btfss	6,1	;volatile
+   351     0710  2F12               	goto	u381
+   352     0711  2F13               	goto	u380
+   353     0712                     u381:
+   354     0712  2F2C               	goto	l756
+   355     0713                     u380:
+   356     0713                     l748:
+   357                           
+   358                           ;reusable_pwm.c: 42:             if(velocity < 100) velocity++;
+   359     0713  3064               	movlw	100
+   360     0714  023B               	subwf	main@velocity,w
+   361     0715  1803               	skipnc
+   362     0716  2F18               	goto	u391
+   363     0717  2F19               	goto	u390
+   364     0718                     u391:
+   365     0718  2F1B               	goto	l752
+   366     0719                     u390:
+   367     0719                     l750:
+   368     0719  3001               	movlw	1
+   369     071A  07BB               	addwf	main@velocity,f
+   370     071B                     l752:
+   371                           
+   372                           ;reusable_pwm.c: 43:             set_percent(velocity);
+   373     071B  083B               	movf	main@velocity,w
+   374     071C  120A  118A  2767  120A  118A  	fcall	_set_percent
+   375     0721                     l754:
+   376                           
+   377                           ;reusable_pwm.c: 44:             _delay((unsigned long)((20)*(4000000/4000.0)));
+   378     0721  301A               	movlw	26
+   379     0722  1283               	bcf	3,5	;RP0=0, select bank0
+   380     0723  1303               	bcf	3,6	;RP1=0, select bank0
+   381     0724  00BA               	movwf	??_main+1
+   382     0725  30F7               	movlw	247
+   383     0726  00B9               	movwf	??_main
+   384     0727                     u457:
+   385     0727  0BB9               	decfsz	??_main,f
+   386     0728  2F27               	goto	u457
+   387     0729  0BBA               	decfsz	??_main+1,f
+   388     072A  2F27               	goto	u457
+   389     072B  2F2C               	nop2
+   390     072C                     l756:
+   391                           
+   392                           ;reusable_pwm.c: 46:         if(PORTBbits.RB2){
+   393     072C  1283               	bcf	3,5	;RP0=0, select bank0
+   394     072D  1303               	bcf	3,6	;RP1=0, select bank0
+   395     072E  1D06               	btfss	6,2	;volatile
+   396     072F  2F31               	goto	u401
+   397     0730  2F32               	goto	u400
+   398     0731                     u401:
+   399     0731  2F4A               	goto	l766
+   400     0732                     u400:
+   401     0732                     l758:
+   402                           
+   403                           ;reusable_pwm.c: 47:             if(velocity > 0) velocity--;
+   404     0732  083B               	movf	main@velocity,w
+   405     0733  1903               	btfsc	3,2
+   406     0734  2F36               	goto	u411
+   407     0735  2F37               	goto	u410
+   408     0736                     u411:
+   409     0736  2F39               	goto	l762
+   410     0737                     u410:
+   411     0737                     l760:
+   412     0737  3001               	movlw	1
+   413     0738  02BB               	subwf	main@velocity,f
+   414     0739                     l762:
+   415                           
+   416                           ;reusable_pwm.c: 48:             set_percent(velocity);
+   417     0739  083B               	movf	main@velocity,w
+   418     073A  120A  118A  2767  120A  118A  	fcall	_set_percent
+   419     073F                     l764:
+   420                           
+   421                           ;reusable_pwm.c: 49:             _delay((unsigned long)((20)*(4000000/4000.0)));
+   422     073F  301A               	movlw	26
+   423     0740  1283               	bcf	3,5	;RP0=0, select bank0
+   424     0741  1303               	bcf	3,6	;RP1=0, select bank0
+   425     0742  00BA               	movwf	??_main+1
+   426     0743  30F7               	movlw	247
+   427     0744  00B9               	movwf	??_main
+   428     0745                     u467:
+   429     0745  0BB9               	decfsz	??_main,f
+   430     0746  2F45               	goto	u467
+   431     0747  0BBA               	decfsz	??_main+1,f
+   432     0748  2F45               	goto	u467
+   433     0749  2F4A               	nop2
+   434     074A                     l766:
+   435                           
+   436                           ;reusable_pwm.c: 52:         if(PORTBbits.RB3){
+   437     074A  1283               	bcf	3,5	;RP0=0, select bank0
+   438     074B  1303               	bcf	3,6	;RP1=0, select bank0
+   439     074C  1D86               	btfss	6,3	;volatile
+   440     074D  2F4F               	goto	u421
+   441     074E  2F50               	goto	u420
+   442     074F                     u421:
+   443     074F  2F52               	goto	l39
+   444     0750                     u420:
+   445     0750                     l768:
+   446                           
+   447                           ;reusable_pwm.c: 53:             PORTA = 0x01;
+   448     0750  3001               	movlw	1
+   449     0751  0085               	movwf	5	;volatile
+   450     0752                     l39:	
+   451                           ;reusable_pwm.c: 54:         }
+   452                           
+   453                           
+   454                           ;reusable_pwm.c: 56:         if(PORTBbits.RB4){
+   455     0752  1E06               	btfss	6,4	;volatile
+   456     0753  2F55               	goto	u431
+   457     0754  2F56               	goto	u430
+   458     0755                     u431:
+   459     0755  2F58               	goto	l40
+   460     0756                     u430:
+   461     0756                     l770:
+   462                           
+   463                           ;reusable_pwm.c: 57:             PORTA = 0x02;
+   464     0756  3002               	movlw	2
+   465     0757  0085               	movwf	5	;volatile
+   466     0758                     l40:	
+   467                           ;reusable_pwm.c: 58:         }
+   468                           
+   469                           
+   470                           ;reusable_pwm.c: 60:         if(PORTBbits.RB5){
+   471     0758  1E86               	btfss	6,5	;volatile
+   472     0759  2F5B               	goto	u441
+   473     075A  2F5C               	goto	u440
+   474     075B                     u441:
+   475     075B  2F0D               	goto	l746
+   476     075C                     u440:
+   477     075C                     l772:
+   478                           
+   479                           ;reusable_pwm.c: 61:             PORTA = 0x00;
+   480     075C  0185               	clrf	5	;volatile
+   481     075D                     l774:
+   482                           
+   483                           ;reusable_pwm.c: 62:             set_percent(0);
+   484     075D  3000               	movlw	0
+   485     075E  120A  118A  2767  120A  118A  	fcall	_set_percent
+   486     0763  2F0D               	goto	l746
+   487     0764  120A  118A  2800   	ljmp	start
+   488     0767                     __end_of_main:
+   489                           
+   490                           	psect	text1
+   491     0767                     __ptext1:	
+   492 ;; *************** function _set_percent *****************
+   493 ;; Defined at:
+   494 ;;		line 21 in file "reusable_pwm.c"
+   495 ;; Parameters:    Size  Location     Type
+   496 ;;  percent         1    wreg     unsigned char 
+   497 ;; Auto vars:     Size  Location     Type
+   498 ;;  percent         1   20[BANK0 ] unsigned char 
+   499 ;;  dc              4   21[BANK0 ] unsigned long 
+   500 ;;  max_counts      2   18[BANK0 ] unsigned int 
+   501 ;; Return value:  Size  Location     Type
+   502 ;;                  1    wreg      void 
+   503 ;; Registers used:
+   504 ;;		wreg, status,2, status,0, pclath, cstack
+   505 ;; Tracked objects:
+   506 ;;		On entry : 0/0
+   507 ;;		On exit  : 0/0
+   508 ;;		Unchanged: 0/0
+   509 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   510 ;;      Params:         0       0       0       0       0
+   511 ;;      Locals:         0       7       0       0       0
+   512 ;;      Temps:          0       5       0       0       0
+   513 ;;      Totals:         0      12       0       0       0
+   514 ;;Total ram usage:       12 bytes
+   515 ;; Hardware stack levels used: 1
+   516 ;; Hardware stack levels required when called: 1
+   517 ;; This function calls:
+   518 ;;		___lldiv
+   519 ;;		___lmul
+   520 ;; This function is called by:
+   521 ;;		_main
+   522 ;; This function uses a non-reentrant model
+   523 ;;
+   524                           
+   525     0767                     _set_percent:	
+   526                           ;psect for function _set_percent
+   527                           
+   528                           
+   529                           ;incstack = 0
+   530                           ; Regs used in _set_percent: [wreg+status,2+status,0+pclath+cstack]
+   531                           ;set_percent@percent stored from wreg
+   532     0767  1283               	bcf	3,5	;RP0=0, select bank0
+   533     0768  1303               	bcf	3,6	;RP1=0, select bank0
+   534     0769  00B4               	movwf	set_percent@percent
+   535     076A                     l724:
+   536                           
+   537                           ;reusable_pwm.c: 22:     if(percent > 100) percent = 100;
+   538     076A  3065               	movlw	101
+   539     076B  0234               	subwf	set_percent@percent,w
+   540     076C  1C03               	skipc
+   541     076D  2F6F               	goto	u351
+   542     076E  2F70               	goto	u350
+   543     076F                     u351:
+   544     076F  2F72               	goto	l728
+   545     0770                     u350:
+   546     0770                     l726:
+   547     0770  3064               	movlw	100
+   548     0771  00B4               	movwf	set_percent@percent
+   549     0772                     l728:
+   550                           
+   551                           ;reusable_pwm.c: 24:     unsigned int max_counts = 4 * (PR2 + 1);
+   552     0772  1683               	bsf	3,5	;RP0=1, select bank1
+   553     0773  1303               	bcf	3,6	;RP1=0, select bank1
+   554     0774  0812               	movf	18,w	;volatile
+   555     0775  1283               	bcf	3,5	;RP0=0, select bank0
+   556     0776  1303               	bcf	3,6	;RP1=0, select bank0
+   557     0777  00AD               	movwf	??_set_percent
+   558     0778  01AE               	clrf	??_set_percent+1
+   559     0779  1003               	clrc
+   560     077A  0DAD               	rlf	??_set_percent,f
+   561     077B  0DAE               	rlf	??_set_percent+1,f
+   562     077C  1003               	clrc
+   563     077D  0DAD               	rlf	??_set_percent,f
+   564     077E  0DAE               	rlf	??_set_percent+1,f
+   565     077F  082D               	movf	??_set_percent,w
+   566     0780  3E04               	addlw	4
+   567     0781  00AF               	movwf	??_set_percent+2
+   568     0782  082E               	movf	??_set_percent+1,w
+   569     0783  1803               	skipnc
+   570     0784  3E01               	addlw	1
+   571     0785  3E00               	addlw	0
+   572     0786  00B0               	movwf	??_set_percent+3
+   573     0787  082F               	movf	??_set_percent+2,w
+   574     0788  00B2               	movwf	set_percent@max_counts
+   575     0789  0830               	movf	??_set_percent+3,w
+   576     078A  00B3               	movwf	set_percent@max_counts+1
+   577     078B                     l730:
+   578                           
+   579                           ;reusable_pwm.c: 25:     unsigned long dc = ((unsigned long)percent * max_counts) / 100;
+   580     078B  3000               	movlw	0
+   581     078C  00A3               	movwf	___lldiv@divisor+3
+   582     078D  3000               	movlw	0
+   583     078E  00A2               	movwf	___lldiv@divisor+2
+   584     078F  3000               	movlw	0
+   585     0790  00A1               	movwf	___lldiv@divisor+1
+   586     0791  3064               	movlw	100
+   587     0792  00A0               	movwf	___lldiv@divisor
+   588     0793  0834               	movf	set_percent@percent,w
+   589     0794  00AD               	movwf	??_set_percent
+   590     0795  01AE               	clrf	??_set_percent+1
+   591     0796  01AF               	clrf	??_set_percent+2
+   592     0797  01B0               	clrf	??_set_percent+3
+   593     0798  0830               	movf	??_set_percent+3,w
+   594     0799  00F3               	movwf	___lmul@multiplier+3
+   595     079A  082F               	movf	??_set_percent+2,w
+   596     079B  00F2               	movwf	___lmul@multiplier+2
+   597     079C  082E               	movf	??_set_percent+1,w
+   598     079D  00F1               	movwf	___lmul@multiplier+1
+   599     079E  082D               	movf	??_set_percent,w
+   600     079F  00F0               	movwf	___lmul@multiplier
+   601     07A0  0832               	movf	set_percent@max_counts,w
+   602     07A1  00F4               	movwf	___lmul@multiplicand
+   603     07A2  0833               	movf	set_percent@max_counts+1,w
+   604     07A3  00F5               	movwf	___lmul@multiplicand+1
+   605     07A4  01F6               	clrf	___lmul@multiplicand+2
+   606     07A5  01F7               	clrf	___lmul@multiplicand+3
+   607     07A6  120A  118A  2654  120A  118A  	fcall	___lmul
+   608     07AB  0873               	movf	?___lmul+3,w
+   609     07AC  1283               	bcf	3,5	;RP0=0, select bank0
+   610     07AD  1303               	bcf	3,6	;RP1=0, select bank0
+   611     07AE  00A7               	movwf	___lldiv@dividend+3
+   612     07AF  0872               	movf	?___lmul+2,w
+   613     07B0  00A6               	movwf	___lldiv@dividend+2
+   614     07B1  0871               	movf	?___lmul+1,w
+   615     07B2  00A5               	movwf	___lldiv@dividend+1
+   616     07B3  0870               	movf	?___lmul,w
+   617     07B4  00A4               	movwf	___lldiv@dividend
+   618     07B5  120A  118A  269A  120A  118A  	fcall	___lldiv
+   619     07BA  1283               	bcf	3,5	;RP0=0, select bank0
+   620     07BB  1303               	bcf	3,6	;RP1=0, select bank0
+   621     07BC  0823               	movf	?___lldiv+3,w
+   622     07BD  00B8               	movwf	set_percent@dc+3
+   623     07BE  0822               	movf	?___lldiv+2,w
+   624     07BF  00B7               	movwf	set_percent@dc+2
+   625     07C0  0821               	movf	?___lldiv+1,w
+   626     07C1  00B6               	movwf	set_percent@dc+1
+   627     07C2  0820               	movf	?___lldiv,w
+   628     07C3  00B5               	movwf	set_percent@dc
+   629     07C4                     l732:
+   630                           
+   631                           ;reusable_pwm.c: 27:     CCPR1L = (unsigned char)(dc >> 2);
+   632     07C4  0835               	movf	set_percent@dc,w
+   633     07C5  00AD               	movwf	??_set_percent
+   634     07C6  0836               	movf	set_percent@dc+1,w
+   635     07C7  00AE               	movwf	??_set_percent+1
+   636     07C8  0837               	movf	set_percent@dc+2,w
+   637     07C9  00AF               	movwf	??_set_percent+2
+   638     07CA  0838               	movf	set_percent@dc+3,w
+   639     07CB  00B0               	movwf	??_set_percent+3
+   640     07CC  3002               	movlw	2
+   641     07CD                     u365:
+   642     07CD  1003               	clrc
+   643     07CE  0CB0               	rrf	??_set_percent+3,f
+   644     07CF  0CAF               	rrf	??_set_percent+2,f
+   645     07D0  0CAE               	rrf	??_set_percent+1,f
+   646     07D1  0CAD               	rrf	??_set_percent,f
+   647     07D2                     u360:
+   648     07D2  3EFF               	addlw	-1
+   649     07D3  1D03               	skipz
+   650     07D4  2FCD               	goto	u365
+   651     07D5  082D               	movf	??_set_percent,w
+   652     07D6  0095               	movwf	21	;volatile
+   653     07D7                     l734:
+   654                           
+   655                           ;reusable_pwm.c: 28:     CCP1CONbits.CCP1X = (dc >> 1) & 1;
+   656     07D7  0835               	movf	set_percent@dc,w
+   657     07D8  00AD               	movwf	??_set_percent
+   658     07D9  0836               	movf	set_percent@dc+1,w
+   659     07DA  00AE               	movwf	??_set_percent+1
+   660     07DB  0837               	movf	set_percent@dc+2,w
+   661     07DC  00AF               	movwf	??_set_percent+2
+   662     07DD  0838               	movf	set_percent@dc+3,w
+   663     07DE  00B0               	movwf	??_set_percent+3
+   664     07DF  3001               	movlw	1
+   665     07E0                     u375:
+   666     07E0  1003               	clrc
+   667     07E1  0CB0               	rrf	??_set_percent+3,f
+   668     07E2  0CAF               	rrf	??_set_percent+2,f
+   669     07E3  0CAE               	rrf	??_set_percent+1,f
+   670     07E4  0CAD               	rrf	??_set_percent,f
+   671     07E5                     u370:
+   672     07E5  3EFF               	addlw	-1
+   673     07E6  1D03               	skipz
+   674     07E7  2FE0               	goto	u375
+   675     07E8  082D               	movf	??_set_percent,w
+   676     07E9  3901               	andlw	1
+   677     07EA  00B1               	movwf	??_set_percent+4
+   678     07EB  0EB1               	swapf	??_set_percent+4,f
+   679     07EC  0DB1               	rlf	??_set_percent+4,f
+   680     07ED  0817               	movf	23,w	;volatile
+   681     07EE  0631               	xorwf	??_set_percent+4,w
+   682     07EF  39DF               	andlw	-33
+   683     07F0  0631               	xorwf	??_set_percent+4,w
+   684     07F1  0097               	movwf	23	;volatile
+   685     07F2                     l736:
+   686                           
+   687                           ;reusable_pwm.c: 29:     CCP1CONbits.CCP1Y = dc & 1;
+   688     07F2  0835               	movf	set_percent@dc,w
+   689     07F3  3901               	andlw	1
+   690     07F4  00AD               	movwf	??_set_percent
+   691     07F5  0EAD               	swapf	??_set_percent,f
+   692     07F6  0817               	movf	23,w	;volatile
+   693     07F7  062D               	xorwf	??_set_percent,w
+   694     07F8  39EF               	andlw	-17
+   695     07F9  062D               	xorwf	??_set_percent,w
+   696     07FA  0097               	movwf	23	;volatile
+   697     07FB                     l29:
+   698     07FB  0008               	return
+   699     07FC                     __end_of_set_percent:
+   700                           
+   701                           	psect	text2
+   702     0654                     __ptext2:	
+   703 ;; *************** function ___lmul *****************
+   704 ;; Defined at:
+   705 ;;		line 15 in file "C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul32.c"
+   706 ;; Parameters:    Size  Location     Type
+   707 ;;  multiplier      4    0[COMMON] unsigned long 
+   708 ;;  multiplicand    4    4[COMMON] unsigned long 
+   709 ;; Auto vars:     Size  Location     Type
+   710 ;;  product         4    9[COMMON] unsigned long 
+   711 ;; Return value:  Size  Location     Type
+   712 ;;                  4    0[COMMON] unsigned long 
+   713 ;; Registers used:
+   714 ;;		wreg, status,2, status,0
+   715 ;; Tracked objects:
+   716 ;;		On entry : 0/0
+   717 ;;		On exit  : 0/0
+   718 ;;		Unchanged: 0/0
+   719 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   720 ;;      Params:         8       0       0       0       0
+   721 ;;      Locals:         4       0       0       0       0
+   722 ;;      Temps:          1       0       0       0       0
+   723 ;;      Totals:        13       0       0       0       0
+   724 ;;Total ram usage:       13 bytes
+   725 ;; Hardware stack levels used: 1
+   726 ;; This function calls:
+   727 ;;		Nothing
+   728 ;; This function is called by:
+   729 ;;		_set_percent
+   730 ;; This function uses a non-reentrant model
+   731 ;;
+   732                           
+   733     0654                     ___lmul:	
+   734                           ;psect for function ___lmul
+   735                           
+   736     0654                     l682:	
+   737                           ;incstack = 0
+   738                           ; Regs used in ___lmul: [wreg+status,2+status,0]
+   739                           
+   740     0654  3000               	movlw	0
+   741     0655  00FC               	movwf	___lmul@product+3
+   742     0656  3000               	movlw	0
+   743     0657  00FB               	movwf	___lmul@product+2
+   744     0658  3000               	movlw	0
+   745     0659  00FA               	movwf	___lmul@product+1
+   746     065A  3000               	movlw	0
+   747     065B  00F9               	movwf	___lmul@product
+   748     065C                     l684:
+   749     065C  1C70               	btfss	___lmul@multiplier,0
+   750     065D  2E5F               	goto	u231
+   751     065E  2E60               	goto	u230
+   752     065F                     u231:
+   753     065F  2E77               	goto	l688
+   754     0660                     u230:
+   755     0660                     l686:
+   756     0660  0874               	movf	___lmul@multiplicand,w
+   757     0661  07F9               	addwf	___lmul@product,f
+   758     0662  0875               	movf	___lmul@multiplicand+1,w
+   759     0663  1103               	clrz
+   760     0664  1803               	skipnc
+   761     0665  3E01               	addlw	1
+   762     0666  1903               	skipnz
+   763     0667  2E69               	goto	u241
+   764     0668  07FA               	addwf	___lmul@product+1,f
+   765     0669                     u241:
+   766     0669  0876               	movf	___lmul@multiplicand+2,w
+   767     066A  1103               	clrz
+   768     066B  1803               	skipnc
+   769     066C  3E01               	addlw	1
+   770     066D  1903               	skipnz
+   771     066E  2E70               	goto	u242
+   772     066F  07FB               	addwf	___lmul@product+2,f
+   773     0670                     u242:
+   774     0670  0877               	movf	___lmul@multiplicand+3,w
+   775     0671  1103               	clrz
+   776     0672  1803               	skipnc
+   777     0673  3E01               	addlw	1
+   778     0674  1903               	skipnz
+   779     0675  2E77               	goto	u243
+   780     0676  07FC               	addwf	___lmul@product+3,f
+   781     0677                     u243:
+   782     0677                     l688:
+   783     0677  3001               	movlw	1
+   784     0678  00F8               	movwf	??___lmul
+   785     0679                     u255:
+   786     0679  1003               	clrc
+   787     067A  0DF4               	rlf	___lmul@multiplicand,f
+   788     067B  0DF5               	rlf	___lmul@multiplicand+1,f
+   789     067C  0DF6               	rlf	___lmul@multiplicand+2,f
+   790     067D  0DF7               	rlf	___lmul@multiplicand+3,f
+   791     067E  0BF8               	decfsz	??___lmul,f
+   792     067F  2E79               	goto	u255
+   793     0680                     l690:
+   794     0680  3001               	movlw	1
+   795     0681                     u265:
+   796     0681  1003               	clrc
+   797     0682  0CF3               	rrf	___lmul@multiplier+3,f
+   798     0683  0CF2               	rrf	___lmul@multiplier+2,f
+   799     0684  0CF1               	rrf	___lmul@multiplier+1,f
+   800     0685  0CF0               	rrf	___lmul@multiplier,f
+   801     0686  3EFF               	addlw	-1
+   802     0687  1D03               	skipz
+   803     0688  2E81               	goto	u265
+   804     0689  0873               	movf	___lmul@multiplier+3,w
+   805     068A  0472               	iorwf	___lmul@multiplier+2,w
+   806     068B  0471               	iorwf	___lmul@multiplier+1,w
+   807     068C  0470               	iorwf	___lmul@multiplier,w
+   808     068D  1D03               	skipz
+   809     068E  2E90               	goto	u271
+   810     068F  2E91               	goto	u270
+   811     0690                     u271:
+   812     0690  2E5C               	goto	l684
+   813     0691                     u270:
+   814     0691                     l692:
+   815     0691  087C               	movf	___lmul@product+3,w
+   816     0692  00F3               	movwf	?___lmul+3
+   817     0693  087B               	movf	___lmul@product+2,w
+   818     0694  00F2               	movwf	?___lmul+2
+   819     0695  087A               	movf	___lmul@product+1,w
+   820     0696  00F1               	movwf	?___lmul+1
+   821     0697  0879               	movf	___lmul@product,w
+   822     0698  00F0               	movwf	?___lmul
+   823     0699                     l144:
+   824     0699  0008               	return
+   825     069A                     __end_of___lmul:
+   826                           
+   827                           	psect	text3
+   828     069A                     __ptext3:	
+   829 ;; *************** function ___lldiv *****************
+   830 ;; Defined at:
+   831 ;;		line 5 in file "C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c"
+   832 ;; Parameters:    Size  Location     Type
+   833 ;;  divisor         4    0[BANK0 ] unsigned long 
+   834 ;;  dividend        4    4[BANK0 ] unsigned long 
+   835 ;; Auto vars:     Size  Location     Type
+   836 ;;  quotient        4    8[BANK0 ] unsigned long 
+   837 ;;  counter         1   12[BANK0 ] unsigned char 
+   838 ;; Return value:  Size  Location     Type
+   839 ;;                  4    0[BANK0 ] unsigned long 
+   840 ;; Registers used:
+   841 ;;		wreg, status,2, status,0
+   842 ;; Tracked objects:
+   843 ;;		On entry : 0/0
+   844 ;;		On exit  : 0/0
+   845 ;;		Unchanged: 0/0
+   846 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   847 ;;      Params:         0       8       0       0       0
+   848 ;;      Locals:         0       5       0       0       0
+   849 ;;      Temps:          1       0       0       0       0
+   850 ;;      Totals:         1      13       0       0       0
+   851 ;;Total ram usage:       14 bytes
+   852 ;; Hardware stack levels used: 1
+   853 ;; This function calls:
+   854 ;;		Nothing
+   855 ;; This function is called by:
+   856 ;;		_set_percent
+   857 ;; This function uses a non-reentrant model
+   858 ;;
+   859                           
+   860     069A                     ___lldiv:	
+   861                           ;psect for function ___lldiv
+   862                           
+   863     069A                     l696:	
+   864                           ;incstack = 0
+   865                           ; Regs used in ___lldiv: [wreg+status,2+status,0]
+   866                           
+   867     069A  3000               	movlw	0
+   868     069B  1283               	bcf	3,5	;RP0=0, select bank0
+   869     069C  1303               	bcf	3,6	;RP1=0, select bank0
+   870     069D  00AB               	movwf	___lldiv@quotient+3
+   871     069E  3000               	movlw	0
+   872     069F  00AA               	movwf	___lldiv@quotient+2
+   873     06A0  3000               	movlw	0
+   874     06A1  00A9               	movwf	___lldiv@quotient+1
+   875     06A2  3000               	movlw	0
+   876     06A3  00A8               	movwf	___lldiv@quotient
+   877     06A4  0823               	movf	___lldiv@divisor+3,w
+   878     06A5  0422               	iorwf	___lldiv@divisor+2,w
+   879     06A6  0421               	iorwf	___lldiv@divisor+1,w
+   880     06A7  0420               	iorwf	___lldiv@divisor,w
+   881     06A8  1903               	skipnz
+   882     06A9  2EAB               	goto	u281
+   883     06AA  2EAC               	goto	u280
+   884     06AB                     u281:
+   885     06AB  2EF7               	goto	l716
+   886     06AC                     u280:
+   887     06AC                     l698:
+   888     06AC  3001               	movlw	1
+   889     06AD  00AC               	movwf	___lldiv@counter
+   890     06AE  2EBA               	goto	l702
+   891     06AF                     l700:
+   892     06AF  3001               	movlw	1
+   893     06B0  00FD               	movwf	??___lldiv
+   894     06B1                     u295:
+   895     06B1  1003               	clrc
+   896     06B2  0DA0               	rlf	___lldiv@divisor,f
+   897     06B3  0DA1               	rlf	___lldiv@divisor+1,f
+   898     06B4  0DA2               	rlf	___lldiv@divisor+2,f
+   899     06B5  0DA3               	rlf	___lldiv@divisor+3,f
+   900     06B6  0BFD               	decfsz	??___lldiv,f
+   901     06B7  2EB1               	goto	u295
+   902     06B8  3001               	movlw	1
+   903     06B9  07AC               	addwf	___lldiv@counter,f
+   904     06BA                     l702:
+   905     06BA  1FA3               	btfss	___lldiv@divisor+3,7
+   906     06BB  2EBD               	goto	u301
+   907     06BC  2EBE               	goto	u300
+   908     06BD                     u301:
+   909     06BD  2EAF               	goto	l700
+   910     06BE                     u300:
+   911     06BE                     l704:
+   912     06BE  3001               	movlw	1
+   913     06BF  00FD               	movwf	??___lldiv
+   914     06C0                     u315:
+   915     06C0  1003               	clrc
+   916     06C1  0DA8               	rlf	___lldiv@quotient,f
+   917     06C2  0DA9               	rlf	___lldiv@quotient+1,f
+   918     06C3  0DAA               	rlf	___lldiv@quotient+2,f
+   919     06C4  0DAB               	rlf	___lldiv@quotient+3,f
+   920     06C5  0BFD               	decfsz	??___lldiv,f
+   921     06C6  2EC0               	goto	u315
+   922     06C7                     l706:
+   923     06C7  0823               	movf	___lldiv@divisor+3,w
+   924     06C8  0227               	subwf	___lldiv@dividend+3,w
+   925     06C9  1D03               	skipz
+   926     06CA  2ED5               	goto	u325
+   927     06CB  0822               	movf	___lldiv@divisor+2,w
+   928     06CC  0226               	subwf	___lldiv@dividend+2,w
+   929     06CD  1D03               	skipz
+   930     06CE  2ED5               	goto	u325
+   931     06CF  0821               	movf	___lldiv@divisor+1,w
+   932     06D0  0225               	subwf	___lldiv@dividend+1,w
+   933     06D1  1D03               	skipz
+   934     06D2  2ED5               	goto	u325
+   935     06D3  0820               	movf	___lldiv@divisor,w
+   936     06D4  0224               	subwf	___lldiv@dividend,w
+   937     06D5                     u325:
+   938     06D5  1C03               	skipc
+   939     06D6  2ED8               	goto	u321
+   940     06D7  2ED9               	goto	u320
+   941     06D8                     u321:
+   942     06D8  2EE8               	goto	l712
+   943     06D9                     u320:
+   944     06D9                     l708:
+   945     06D9  0820               	movf	___lldiv@divisor,w
+   946     06DA  02A4               	subwf	___lldiv@dividend,f
+   947     06DB  0821               	movf	___lldiv@divisor+1,w
+   948     06DC  1C03               	skipc
+   949     06DD  0F21               	incfsz	___lldiv@divisor+1,w
+   950     06DE  02A5               	subwf	___lldiv@dividend+1,f
+   951     06DF  0822               	movf	___lldiv@divisor+2,w
+   952     06E0  1C03               	skipc
+   953     06E1  0F22               	incfsz	___lldiv@divisor+2,w
+   954     06E2  02A6               	subwf	___lldiv@dividend+2,f
+   955     06E3  0823               	movf	___lldiv@divisor+3,w
+   956     06E4  1C03               	skipc
+   957     06E5  0F23               	incfsz	___lldiv@divisor+3,w
+   958     06E6  02A7               	subwf	___lldiv@dividend+3,f
+   959     06E7                     l710:
+   960     06E7  1428               	bsf	___lldiv@quotient,0
+   961     06E8                     l712:
+   962     06E8  3001               	movlw	1
+   963     06E9                     u335:
+   964     06E9  1003               	clrc
+   965     06EA  0CA3               	rrf	___lldiv@divisor+3,f
+   966     06EB  0CA2               	rrf	___lldiv@divisor+2,f
+   967     06EC  0CA1               	rrf	___lldiv@divisor+1,f
+   968     06ED  0CA0               	rrf	___lldiv@divisor,f
+   969     06EE  3EFF               	addlw	-1
+   970     06EF  1D03               	skipz
+   971     06F0  2EE9               	goto	u335
+   972     06F1                     l714:
+   973     06F1  3001               	movlw	1
+   974     06F2  02AC               	subwf	___lldiv@counter,f
+   975     06F3  1D03               	btfss	3,2
+   976     06F4  2EF6               	goto	u341
+   977     06F5  2EF7               	goto	u340
+   978     06F6                     u341:
+   979     06F6  2EBE               	goto	l704
+   980     06F7                     u340:
+   981     06F7                     l716:
+   982     06F7  082B               	movf	___lldiv@quotient+3,w
+   983     06F8  00A3               	movwf	?___lldiv+3
+   984     06F9  082A               	movf	___lldiv@quotient+2,w
+   985     06FA  00A2               	movwf	?___lldiv+2
+   986     06FB  0829               	movf	___lldiv@quotient+1,w
+   987     06FC  00A1               	movwf	?___lldiv+1
+   988     06FD  0828               	movf	___lldiv@quotient,w
+   989     06FE  00A0               	movwf	?___lldiv
+   990     06FF                     l166:
+   991     06FF  0008               	return
+   992     0700                     __end_of___lldiv:
+   993                           
+   994                           	psect	text4
+   995     0643                     __ptext4:	
+   996 ;; *************** function _pwm_init *****************
+   997 ;; Defined at:
+   998 ;;		line 11 in file "reusable_pwm.c"
+   999 ;; Parameters:    Size  Location     Type
+  1000 ;;		None
+  1001 ;; Auto vars:     Size  Location     Type
+  1002 ;;		None
+  1003 ;; Return value:  Size  Location     Type
+  1004 ;;                  1    wreg      void 
+  1005 ;; Registers used:
+  1006 ;;		status,2
+  1007 ;; Tracked objects:
+  1008 ;;		On entry : 0/0
+  1009 ;;		On exit  : 0/0
+  1010 ;;		Unchanged: 0/0
+  1011 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1012 ;;      Params:         0       0       0       0       0
+  1013 ;;      Locals:         0       0       0       0       0
+  1014 ;;      Temps:          0       0       0       0       0
+  1015 ;;      Totals:         0       0       0       0       0
+  1016 ;;Total ram usage:        0 bytes
+  1017 ;; Hardware stack levels used: 1
+  1018 ;; This function calls:
+  1019 ;;		Nothing
+  1020 ;; This function is called by:
+  1021 ;;		_main
+  1022 ;; This function uses a non-reentrant model
+  1023 ;;
+  1024                           
+  1025     0643                     _pwm_init:	
+  1026                           ;psect for function _pwm_init
+  1027                           
+  1028     0643                     l720:	
+  1029                           ;incstack = 0
+  1030                           ; Regs used in _pwm_init: [status,2]
+  1031                           
+  1032                           
+  1033                           ;reusable_pwm.c: 12:     TRISCbits.TRISC2 = 0;
+  1034     0643  1683               	bsf	3,5	;RP0=1, select bank1
+  1035     0644  1303               	bcf	3,6	;RP1=0, select bank1
+  1036     0645  1107               	bcf	7,2	;volatile
+  1037                           
+  1038                           ;reusable_pwm.c: 13:     CCP1CON = 0b00001100;
+  1039     0646  300C               	movlw	12
+  1040     0647  1283               	bcf	3,5	;RP0=0, select bank0
+  1041     0648  1303               	bcf	3,6	;RP1=0, select bank0
+  1042     0649  0097               	movwf	23	;volatile
+  1043                           
+  1044                           ;reusable_pwm.c: 15:     PR2 = 249;
+  1045     064A  30F9               	movlw	249
+  1046     064B  1683               	bsf	3,5	;RP0=1, select bank1
+  1047     064C  1303               	bcf	3,6	;RP1=0, select bank1
+  1048     064D  0092               	movwf	18	;volatile
+  1049                           
+  1050                           ;reusable_pwm.c: 16:     T2CON = 0b00000101;
+  1051     064E  3005               	movlw	5
+  1052     064F  1283               	bcf	3,5	;RP0=0, select bank0
+  1053     0650  1303               	bcf	3,6	;RP1=0, select bank0
+  1054     0651  0092               	movwf	18	;volatile
+  1055     0652                     l722:
+  1056                           
+  1057                           ;reusable_pwm.c: 18:     CCPR1L = 0;
+  1058     0652  0195               	clrf	21	;volatile
+  1059     0653                     l25:
+  1060     0653  0008               	return
+  1061     0654                     __end_of_pwm_init:
+  1062     0002                     ___latbits      equ	2
+  1063     007E                     btemp           set	126	;btemp
+  1064     007E                     btemp0          set	126
+  1065     007F                     btemp1          set	127
+  1066     007E                     wtemp0          set	126
+  1067     007F                     wtemp0a         set	127
+  1068     007F                     ttemp0a         set	127
+  1069     0080                     ltemp0a         set	128
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON           14     14      14
+    BANK0            80     28      28
+    BANK1            80      0       0
+    BANK3            96      0       0
+    BANK2            96      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    _set_percent->___lldiv
+    ___lldiv->___lmul
+
+Critical Paths under _main in BANK0
+
+    _main->_set_percent
+    _set_percent->___lldiv
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 3     3      0     499
+                                             25 BANK0      3     3      0
+                           _pwm_init
+                        _set_percent
+ ---------------------------------------------------------------------------------
+ (1) _set_percent                                         12    12      0     408
+                                             13 BANK0     12    12      0
+                            ___lldiv
+                             ___lmul
+ ---------------------------------------------------------------------------------
+ (2) ___lmul                                              13     5      8      94
+                                              0 COMMON    13     5      8
+ ---------------------------------------------------------------------------------
+ (2) ___lldiv                                             14     6      8     164
+                                             13 COMMON     1     1      0
+                                              0 BANK0     13     5      8
+                             ___lmul (ARG)
+ ---------------------------------------------------------------------------------
+ (1) _pwm_init                                             0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _pwm_init
+   _set_percent
+     ___lldiv
+       ___lmul (ARG)
+     ___lmul
+
+Address spaces:
+Name               Size   Autos  Total    Usage
+BITCOMMON           14      0       0      0.0%
+BITBANK0            80      0       0      0.0%
+BITBANK1            80      0       0      0.0%
+BITBANK3            96      0       0      0.0%
+BITBANK2            96      0       0      0.0%
+COMMON              14     14      14    100.0%
+BANK0               80     28      28     35.0%
+BANK1               80      0       0      0.0%
+BANK3               96      0       0      0.0%
+BANK2               96      0       0      0.0%
+STACK                0      0       0      0.0%
+DATA                 0      0      42      0.0%
+
+
+Microchip Technology PIC Macro Assembler V3.10 build 20250813170317 
+Symbol Table                                                                                   Fri Nov 14 11:25:49 2025
+
+                     l40 0758                       l25 0653                       l29 07FB  
+                     l39 0752                      l144 0699                      l166 06FF  
+                    l700 06AF                      l710 06E7                      l702 06BA  
+                    l720 0643                      l712 06E8                      l704 06BE  
+                    l722 0652                      l714 06F1                      l706 06C7  
+                    l730 078B                      l708 06D9                      l716 06F7  
+                    l732 07C4                      l724 076A                      l740 0704  
+                    l734 07D7                      l726 0770                      l750 0719  
+                    l742 0705                      l736 07F2                      l728 0772  
+                    l760 0737                      l752 071B                      l744 070A  
+                    l690 0680                      l682 0654                      l770 0756  
+                    l762 0739                      l754 0721                      l746 070D  
+                    l738 0700                      l692 0691                      l684 065C  
+                    l772 075C                      l764 073F                      l748 0713  
+                    l756 072C                      l686 0660                      l774 075D  
+                    l758 0732                      l766 074A                      l696 069A  
+                    l688 0677                      l768 0750                      l698 06AC  
+                    u300 06BE                      u301 06BD                      u230 0660  
+                    u231 065F                      u320 06D9                      u400 0732  
+                    u321 06D8                      u241 0669                      u401 0731  
+                    u242 0670                      u410 0737                      u315 06C0  
+                    u243 0677                      u411 0736                      u340 06F7  
+                    u420 0750                      u341 06F6                      u325 06D5  
+                    u421 074F                      u270 0691                      u350 0770  
+                    u430 0756                      _PR2 0092                      u335 06E9  
+                    u271 0690                      u255 0679                      u351 076F  
+                    u431 0755                      u280 06AC                      u360 07D2  
+                    u440 075C                      u281 06AB                      u265 0681  
+                    u441 075B                      u370 07E5                      u380 0713  
+                    u365 07CD                      u381 0712                      u390 0719  
+                    u295 06B1                      u375 07E0                      u391 0718  
+                    u457 0727                      u467 0745                     _main 0700  
+                   btemp 007E                     start 0000                    ?_main 0070  
+        __end_of___lldiv 0700                    _T2CON 0012                    _PORTA 0005  
+                  _TRISA 0085                    _TRISB 0086      ___lmul@multiplicand 0074  
+                  btemp0 007E                    btemp1 007F             main@velocity 003B  
+                  status 0003                    wtemp0 007E          __initialization 07FC  
+  set_percent@max_counts 0032             __end_of_main 0767                   ??_main 0039  
+                 _CCPR1L 0015             ?_set_percent 0070                   ___lmul 0654  
+              ??___lldiv 007D                   ltemp0a 0080         __end_of_pwm_init 0654  
+                 ttemp0a 007F                   wtemp0a 007F  __end_of__initialization 07FC  
+         __pcstackCOMMON 0070               __pmaintext 0700                  ?___lmul 0070  
+                _CCP1CON 0017           ___lmul@product 0079                  ___lldiv 069A  
+              ?_pwm_init 0070                  __ptext1 0767                  __ptext2 0654  
+                __ptext3 069A                  __ptext4 0643     end_of_initialization 07FC  
+        ___lldiv@divisor 0020          ___lldiv@counter 002C               ??_pwm_init 0070  
+              _PORTBbits 0006                _TRISCbits 0087              _CCP1CONbits 0017  
+         __end_of___lmul 069A      start_initialization 07FC                 ??___lmul 0078  
+              ___latbits 0002            __pcstackBANK0 0020                 ?___lldiv 0020  
+          ??_set_percent 002D        ___lmul@multiplier 0070            set_percent@dc 0035  
+    __end_of_set_percent 07FC                 _pwm_init 0643       set_percent@percent 0034  
+       ___lldiv@dividend 0024              _set_percent 0767         ___lldiv@quotient 0028  
